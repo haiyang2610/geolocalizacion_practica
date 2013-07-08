@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+<script type="text/javascript" charset="utf-8">
+		
+		// Espere a que PhoneGap se inicie
+		
+		function onBodyLoad() {
+	document.addEventListener("deviceready",onDeviceReady, false);
+    }
+  
+    // PhoneGap esta listo
+    //
+    function onDeviceReady() {
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    }
+
+    // onSuccess Geolocation
+    //
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitud: '           + position.coords.latitude              + '<br />' +
+          'Longitud: '        + position.coords.longitude         + '\n' +
+          'Altitud: '         + position.coords.altitude          + '\n' +
+          'Precisión: '       + position.coords.accuracy          + '\n' +
+          'Precisión altitud' + position.coords.altitudeAccuracy  + '\n' +
+          'Dirección: '       + position.coords.heading           + '\n' +
+          'Velocidad: '       + position.coords.speed             + '\n' +
+          'Timestamp: '       + new Date(position.timestamp)      + '\n');
+    }
+
+    // La función 'callback' onError recibe un objeto `PositionError`.
+    //
+    function onError(error) {
+        alert('codigo: '    + error.code    + '\n' +
+              'mensaje: ' + error.message + '\n');
+    }
+
+
+</script>
+</head>
+
+<body onload="onBodyLoad()">
+	<p id="geolocation">Buscando geolocalización...</p>	
+</body>
+</html>
